@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NexusNetworkCloud.CsharpOpenWeatherMap
 {
-    public class OpenWeatherMapClient
+    public class OpenWeatherMapClient : IDisposable
     {
         private static string address = "https://api.openweathermap.org/data/2.5";
         private readonly HttpClient client = new HttpClient();
@@ -24,6 +24,8 @@ namespace NexusNetworkCloud.CsharpOpenWeatherMap
         {
             client.Dispose();
         }
+
+        public void Dispose() => client.Dispose();
 
         public async Task<WeatherReportResponse> GetCurrentWeatherByZipCodeAsync(int zip)
         {
